@@ -9,6 +9,8 @@ const GroupCreatePresenter = () => {
 		<Style.Container>
 			<Style.Text>그룹 이름</Style.Text>
 			<Input></Input>
+			<Style.Text top={38}>비밀번호</Style.Text>
+			<Input></Input>
 			<Style.Text top={38}>그룹 사진(선택)</Style.Text>
 			<Style.ImageBox>
 				<IoIosCloudUpload width={24} height={24}/>
