@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Style from './GroupPresenter.style';
-import { Button } from '../../../components/button/Button';
+import Button from '../../../components/button/Button';
 
 const GroupPresenter = () => {
 	return (
