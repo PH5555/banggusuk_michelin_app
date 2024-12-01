@@ -1,9 +1,9 @@
 import React from 'react';
 import Styled, {css} from 'styled-components';
 
-const Input = () => {
+const Input = ({long}) => {
   return (
-    <Container></Container>
+    <Container long={long}></Container>
   )
 }
 
