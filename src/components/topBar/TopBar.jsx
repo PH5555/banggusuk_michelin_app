@@ -1,10 +1,14 @@
 import React from 'react';
 import styled, { css } from "styled-components";
 import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
+
 
 const TopBar = () => {
+  const navigate = useNavigate();
+	
   return (
-	  <Container>
+	  <Container onClick={()=>{navigate(-1)}}>
 		  <IoIosArrowBack size={30}/>
 	  </Container>
     
@@ -12,8 +16,12 @@ const TopBar = () => {
 }
 
 const Container = styled.div`
-  position: fixed;
-  top: 30px;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
   cursor: pointer;
 `;
 

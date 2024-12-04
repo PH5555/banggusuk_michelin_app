@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { getCookie } from '../util/Cookie';
+import axios from 'axios';
 
 export const useAxios = () => {
     const [isLoading, setIsLoading] = useState(false);

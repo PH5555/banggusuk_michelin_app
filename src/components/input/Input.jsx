@@ -1,9 +1,9 @@
 import React from 'react';
 import Styled, {css} from 'styled-components';
 
-const Input = ({long}) => {
+const Input = ({onChange, value, name, type, long}) => {
   return (
-    <Container long={long}></Container>
+    <Container type={type} onChange={onChange} value={value} long={long} name={name}></Container>
   )
 }
 

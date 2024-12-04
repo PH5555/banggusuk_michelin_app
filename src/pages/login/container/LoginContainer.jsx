@@ -11,12 +11,12 @@ const LoginContainer = () => {
   const code = searchParams.get('code');
   const navigate = useNavigate();
   const REST_API_KEY='56834518a399e1ca8247d5f53449c20a'
-	const REDIRECT_URI = 'https://banggusuk-michelin-wzhif.run.goorm.site/login'
-	const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`
+  const REDIRECT_URI = 'https://banggusuk-michelin-wzhif.run.goorm.site/login'
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`
 
-	const handleLogin = ()=>{
-		window.location.href = kakaoURL;
-	}
+  const handleLogin = ()=>{
+	window.location.href = kakaoURL;
+  }
 
   useEffect(async() => {
     if (code) {
