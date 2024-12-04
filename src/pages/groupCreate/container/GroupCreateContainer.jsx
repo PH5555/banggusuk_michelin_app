@@ -1,9 +1,11 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
 import GroupCreatePresenter from '../presenter/GroupCreatePresenter'
 import { useNavigate } from 'react-router-dom';
+import { useAxios } from '../../../hook/useAxios';
 
 const GroupCreateContainer = () => {
   const navigate = useNavigate();
+  const [axiosData, isLoading] = useAxios();
 	
   const [inputs, setInputs] = useState({
     name: "",
@@ -40,7 +42,14 @@ const GroupCreateContainer = () => {
     };
   }, [inputEl, fileInputHandler]);
 
-  const createGroup = () => {
+  const createGroup = async () => {
+      const response = await axiosData("useToken", "POST", "/group/create", {
+		  groupName: name,
+		  groupImage: file,
+		  password: password
+	  });
+	  
+	  // group id 저장
 	  console.log(name);
 	  console.log(password);
 	  console.log(file);
