@@ -44,7 +44,7 @@ const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuIte
 								<IoIosStar size={24} color={'#FFF600'}/>
 							</Style.Star>
 							<Style.Star>
-								<IoIosStarOutline size={24} color={'#FFF600'}/>
+								<IoIosStarOutline size={24} color={'#E0E0E0'}/>
 							</Style.Star>
 					</Style.StarBox>
 				</Style.StarContainer>
@@ -55,10 +55,10 @@ const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuIte
 								<IoIosStar size={24} color={'#FFF600'}/>
 							</Style.Star>
 							<Style.Star>
-								<IoIosStarOutline size={24} color={'#FFF600'}/>
+								<IoIosStarOutline size={24} color={'#E0E0E0'}/>
 							</Style.Star>
 							<Style.Star>
-								<IoIosStarOutline size={24} color={'#FFF600'}/>
+								<IoIosStarOutline size={24} color={'#E0E0E0'}/>
 							</Style.Star>
 					</Style.StarBox>
 				</Style.StarContainer>
