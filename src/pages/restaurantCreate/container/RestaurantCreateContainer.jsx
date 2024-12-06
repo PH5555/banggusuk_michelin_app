@@ -2,6 +2,7 @@ import React, {useState, useCallback, useRef, useEffect} from 'react';
 import RestaurantCreatePresenter from '../presenter/RestaurantCreatePresenter'
 
 const RestaurantCreateContainer = () => {
+
   const [inputs, setInputs] = useState({
     name: "",
     comment: "",
@@ -10,7 +11,10 @@ const RestaurantCreateContainer = () => {
   const inputEl = useRef(null);
   const [file, setFile] = useState();
   const [menuItems, setMenuItems] = useState([true, false, false]);
+  const [data, setData] = useState([]);
+  const [isVisiblePopUp , setIsVisiblePopUp] = useState(false);
   const { name, comment } = inputs;
+
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +24,33 @@ const RestaurantCreateContainer = () => {
       [name]: value,
     });
   };
+
+  const searchRestaurant = () => {
+    const kakao = window.kakao;
+    const ps = new kakao.maps.services.Places();
+    ps.keywordSearch("이태원 맛집", (data, status, _pagination) => {
+      if (status === kakao.maps.services.Status.OK) {
+        let temp = []
+        for (let i = 0; i < data.length; i++) {
+          temp.push({
+            position: {
+              lat: data[i].y,
+              lng: data[i].x,
+            },
+            content: {
+              name: data[i].place_name,
+              address: data[i].address_name
+            },
+          })
+        }
+        setData(temp);
+      }
+    })
+  }
+
+  const searchEvent = () =>{
+    setIsVisiblePopUp(true);
+  }
 
   const onClickMenuItem = (id) => {
     let temp = [...menuItems];
@@ -56,7 +87,10 @@ const RestaurantCreateContainer = () => {
     file,
     inputEl,
     menuItems,
-    onClickMenuItem
+    searchEvent,
+    onClickMenuItem,
+    isVisiblePopUp,
+    setIsVisiblePopUp
   };
 
   return (
