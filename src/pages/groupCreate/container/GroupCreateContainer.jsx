@@ -43,7 +43,7 @@ const GroupCreateContainer = () => {
   }, [inputEl, fileInputHandler]);
 
   const createGroup = async () => {
-      const response = await axiosData("useToken", "POST", "/group/create", {
+    const response = await axiosData("file", "POST", "/group/create", {
 		  groupName: name,
 		  groupImage: file,
 		  password: password

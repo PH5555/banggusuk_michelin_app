@@ -23,8 +23,11 @@ const GroupJoinContainer = () => {
     });
   };
 
-  const joinGroup = () => {
-
+  const joinGroup = async() => {
+    const response = await axiosData("useToken", "POST", "/group/join", {
+		  groupName: name,
+		  password: password
+	  });
   }
 
   const props = {
