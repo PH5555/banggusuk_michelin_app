@@ -9,33 +9,19 @@ import { IoIosStarOutline } from "react-icons/io";
 import { IoMdPin } from "react-icons/io";
 import { IoMdFunnel } from "react-icons/io";
 
-const HomePresenter = () => {
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-		const handleResize = () => {
-		setWindowWidth(window.innerWidth);
-		};
-
-		window.addEventListener('resize', handleResize);
-
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
-	const [open, setOpen] = useState(false)
-	const [menuOpen, setMenuOpen] = useState(false);
+const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuItem, setOpen, menuItems}) => {
 	return (
 		<div>
+			{open? <Style.SheetBackground onClick={() => setOpen(false)}/> : null}
 			<Style.SearchBox>
-				<Style.MenuButton onClick={() => setMenuOpen(true)}>
+				<Style.MenuButton onClick={() => onClickMenu()}>
 					<IoMdFunnel size={24}/>
 				</Style.MenuButton>
 			</Style.SearchBox>
 			{menuOpen? <Style.Menu>
 				<Style.Text top={12} bottom={12}>별점</Style.Text>
 				<Style.StarContainer>
-					<Style.Radio/>
+					<Style.Radio selected={menuItems[0]} onClick={() => onClickMenuItem(0)}/>
 					<Style.StarBox>
 							<Style.Star>
 								<IoIosStar size={24} color={'#FFF600'}/>
@@ -49,7 +35,7 @@ const HomePresenter = () => {
 					</Style.StarBox>
 				</Style.StarContainer>
 				<Style.StarContainer>
-					<Style.Radio/>
+					<Style.Radio selected={menuItems[1]} onClick={() => onClickMenuItem(1)}/>
 					<Style.StarBox>
 							<Style.Star>
 								<IoIosStar size={24} color={'#FFF600'}/>
@@ -63,7 +49,7 @@ const HomePresenter = () => {
 					</Style.StarBox>
 				</Style.StarContainer>
 				<Style.StarContainer>
-					<Style.Radio/>
+					<Style.Radio selected={menuItems[2]} onClick={() => onClickMenuItem(2)}/>
 					<Style.StarBox>
 							<Style.Star>
 								<IoIosStar size={24} color={'#FFF600'}/>
@@ -90,7 +76,7 @@ const HomePresenter = () => {
 				</CustomOverlayMap>
 
 			</Map>
-			<BottomSheet open={open}>
+			<BottomSheet blocking={false} open={open}>
 				<Style.BottomSheetContent>
 					<SimpleImageSlider
 						style={{borderRadius: '10px'}}
