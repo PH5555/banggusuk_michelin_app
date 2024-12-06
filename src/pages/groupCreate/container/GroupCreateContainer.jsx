@@ -10,7 +10,7 @@ const GroupCreateContainer = () => {
   const [inputs, setInputs] = useState({
     name: "",
     password: "",
-	passwordConfirm: ""
+	  passwordConfirm: ""
   });
   const inputEl = useRef(null);
   const [file, setFile] = useState();
@@ -60,12 +60,13 @@ const GroupCreateContainer = () => {
   }
   
   const props = {
-	onChange,
-	name,
-	password,
-	inputEl,
-	file,
-	createGroup
+    onChange,
+    name,
+    password,
+    inputEl,
+    file,
+    createGroup,
+    isLoading
   };
 
   return (

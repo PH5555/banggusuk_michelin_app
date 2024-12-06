@@ -4,10 +4,12 @@ import Button from '../../../components/button/Button';
 import Input from '../../../components/input/Input';
 import { IoIosCloudUpload } from "react-icons/io";
 import TopBar from '../../../components/topBar/TopBar';
+import Loading from '../../../components/loading/Loading';
 
-const GroupCreatePresenter = ({onChange, name, password, passwordConfirm, inputEl, file, createGroup}) => {
+const GroupCreatePresenter = ({onChange, name, password, passwordConfirm, inputEl, file, createGroup, isLoading}) => {
 	return (
 		<Style.Container>
+			{isLoading? <Loading/> : null}
 			<TopBar/>
 			<Style.Text>그룹 이름</Style.Text>
 			<Input onChange={onChange} value={name} name={"name"}/>
@@ -21,8 +23,6 @@ const GroupCreatePresenter = ({onChange, name, password, passwordConfirm, inputE
 				<Style.IamgeText>{file ? file.name : '갤러리에서 가져오기'}</Style.IamgeText>
 			</Style.ImageBox>
 			<Style.File type="file" name="file" id="file" ref={inputEl}/>
-			
-			
 			<Style.Box/>
 			<Button onClick={createGroup} backgroundColor={'#FF4F26'} color={'#ffffff'}>그룹 만들기</Button>
 		</Style.Container>
