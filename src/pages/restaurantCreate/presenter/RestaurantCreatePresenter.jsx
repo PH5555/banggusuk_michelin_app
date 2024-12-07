@@ -8,6 +8,7 @@ import { IoIosStar } from "react-icons/io";
 import { IoIosStarOutline } from "react-icons/io";
 import Modal from 'react-modal';
 import { IoMdCheckmark } from "react-icons/io";
+import TextArea from '../../../components/textArea/TextArea'
 
 const RestaurantCreatePresenter = ({name, comment, onChange, inputEl, file, menuItems, onClickMenuItem, searchRestaurant, isVisiblePopUp, setIsVisiblePopUp, searchedRestaurant, selectRestaurant, selectedRestaurant}) => {
 	return (
@@ -37,7 +38,7 @@ const RestaurantCreatePresenter = ({name, comment, onChange, inputEl, file, menu
 				</Style.Star>
 			</Style.StarBox>
 			<Style.Text top={38}>코멘트(최대 100자)</Style.Text>
-			<Input long={true} onChange={onChange} value={comment} name="comment"/>
+			<TextArea onChange={onChange} value={comment} name="comment"/>
 			<Style.Text top={38}>사진</Style.Text>
 			<Style.ImageBox for="file">
 				<IoIosCloudUpload size={24}/>
@@ -51,7 +52,6 @@ const RestaurantCreatePresenter = ({name, comment, onChange, inputEl, file, menu
 			<Modal isOpen={isVisiblePopUp} onRequestClose={() => setIsVisiblePopUp(false)} style={Style.Modal}>
 				{
 					searchedRestaurant.map((e, i) => {
-						console.log(e);
 						return (
 							<>
 								<Style.ModalWrapper key={i}>
