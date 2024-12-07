@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Style from './RestaurantCreatePresenter.style'
+import * as Style from './RestaurantCreatePresenter.style';
 import Button from '../../../components/button/Button';
 import Input from '../../../components/input/Input';
 import TopBar from '../../../components/topBar/TopBar';
@@ -8,11 +8,14 @@ import { IoIosStar } from "react-icons/io";
 import { IoIosStarOutline } from "react-icons/io";
 import Modal from 'react-modal';
 import { IoMdCheckmark } from "react-icons/io";
-import TextArea from '../../../components/textArea/TextArea'
+import TextArea from '../../../components/textArea/TextArea';
+import Loading from '../../../components/loading/Loading';
 
-const RestaurantCreatePresenter = ({name, comment, onChange, inputEl, file, menuItems, onClickMenuItem, searchRestaurant, isVisiblePopUp, setIsVisiblePopUp, searchedRestaurant, selectRestaurant, selectedRestaurant}) => {
+
+const RestaurantCreatePresenter = ({name, comment, onChange, inputEl, file, menuItems, createRestaurant, onClickMenuItem, searchRestaurant, isVisiblePopUp, isLoading, setIsVisiblePopUp, searchedRestaurant, selectRestaurant, selectedRestaurant}) => {
 	return (
 		<Style.Container>
+			{isLoading? <Loading/> : null}
 			<TopBar/>
 			<Style.Text>음식점 이름</Style.Text>
 			<Input searchEvent={searchRestaurant} search onChange={onChange} value={name} name="name"/>
@@ -47,7 +50,7 @@ const RestaurantCreatePresenter = ({name, comment, onChange, inputEl, file, menu
 			<Style.File type="file" name="file" id="file" ref={inputEl}/>
 
 			<Style.Box/>
-			<Button backgroundColor={'#FF4F26'} color={'#ffffff'}>맛집 등록하기</Button>
+			<Button onClick={createRestaurant} backgroundColor={'#FF4F26'} color={'#ffffff'}>맛집 등록하기</Button>
 
 			<Modal isOpen={isVisiblePopUp} onRequestClose={() => setIsVisiblePopUp(false)} style={Style.Modal}>
 				{

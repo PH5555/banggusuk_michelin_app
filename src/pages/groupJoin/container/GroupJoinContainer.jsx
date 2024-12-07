@@ -27,7 +27,7 @@ const GroupJoinContainer = () => {
     const response = await axiosData("useToken", "POST", "/group/join", {
 		  groupName: name,
 		  password: password
-	  });
+	});
   }
 
   const props = {
