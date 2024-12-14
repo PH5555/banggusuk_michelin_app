@@ -6,19 +6,19 @@ export const useAxios = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const defaultInstance = axios.create({
-        baseURL: 'https://some-domain.com/api/',
-        timeout: 10000,
+        baseURL: 'https://banggusuk-michelin.onrender.com',
+        // timeout: 10000,
       });
 
     const tokenInstance = axios.create({
-        baseURL: 'https://some-domain.com/api/',
-        timeout: 10000,
+        baseURL: 'https://banggusuk-michelin.onrender.com',
+        // timeout: 10000,
         headers: {'X-AUTH-TOKEN': getCookie('accessToken')}
       });
 
 	const fileInstance = axios.create({
-        baseURL: 'https://some-domain.com/api/',
-        timeout: 10000,
+        baseURL: 'https://banggusuk-michelin.onrender.com',
+        // timeout: 10000,
         headers: {'X-AUTH-TOKEN': getCookie('accessToken'), 'Content-Type': 'multipart/form-data'}
       });
 	

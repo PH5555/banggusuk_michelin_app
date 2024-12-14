@@ -72,15 +72,16 @@ const RestaurantCreateContainer = () => {
     setMenuItems(temp);
   }
   
-  const createRestaurant = () => {
-  	const response = await axiosData("file", "POST", "/restaurant", {
-	  restaurantName: name,
-	  address: selectedRestaurant.content.address,
-	  image: file,
-	  comment: comment,
-      rating: menuItems.filter(Boolean).length,
-	  groupId: //groupid 
-	});
+  const createRestaurant = async() => {
+	// const response = await axiosData("file", "POST", "/restaurant", {
+	//   restaurantName: name,
+	//   address: selectedRestaurant.content.address,
+	//   image: file,
+	//   comment: comment,
+	// rating: menuItems.filter(Boolean).length,
+	//   groupId: //groupid 
+	// 	//좌표도 넣기
+	// });
   }
 
   const fileInputHandler = useCallback((event) => {
