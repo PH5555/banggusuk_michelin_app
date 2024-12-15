@@ -1,12 +1,13 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react';
 import GroupCreatePresenter from '../presenter/GroupCreatePresenter'
 import { useNavigate } from 'react-router-dom';
-import { useAxios } from '../../../hook/useAxios';
+import axios from 'axios';
+import { getCookie, setCookie } from '../../../util/Cookie';
+
 
 const GroupCreateContainer = () => {
   const navigate = useNavigate();
-  const [axiosData, isLoading] = useAxios();
-	
+  const [isLoading, setIsLoading] = useState(false);
   const [inputs, setInputs] = useState({
     name: "",
     password: "",
@@ -42,21 +43,31 @@ const GroupCreateContainer = () => {
     };
   }, [inputEl, fileInputHandler]);
 
-  const createGroup = async () => {
-    const response = await axiosData("file", "POST", "/group/create", {
-		  groupName: name,
-		  groupImage: file,
-		  password: password
+  const createGroup = () => {
+	  const formData = new FormData();
+	  formData.append("file", file);
+	  formData.append("groupName", name);
+	  formData.append("password", password);
+	  setIsLoading(true);
+	  axios.post('https://banggusuk-michelin.onrender.com/group/create', formData, {
+		  headers: {'X-AUTH-TOKEN': getCookie('accessToken')},
+		  
+	  }).then((response) => {
+		  const res = response.data;
+		  if(res.status === "success"){
+			const groupId = res.data.groupId;
+			setCookie('groupId', groupId);
+			navigate('/home');
+			console.log('그룹 만들기 성공!', groupId);
+		  }
+		  else {
+			console.log('그룹 만들기 실패!');
+		  }
+	  }).catch((error) => {
+		  console.log(error);
+	  }).finally(()=>{
+		  setIsLoading(false);
 	  });
-	  
-	  // group id 저장
-	  console.log(name);
-	  console.log(password);
-	  console.log(file);
-  }
-	
-  const navigateTo = (url) => {
-    navigate(url);
   }
   
   const props = {

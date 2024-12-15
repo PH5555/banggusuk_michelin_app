@@ -23,7 +23,6 @@ const LoginContainer = () => {
 	  if(code){
 		  setIsLoading(true);
 		  axios.post('https://banggusuk-michelin.onrender.com/auth/login', null, {params:{'code': code}}).then((response) => {
-			  console.log(response);
 			  const res = response.data;
 			  if(res.status === "success"){
 				const token = res.data.token;
