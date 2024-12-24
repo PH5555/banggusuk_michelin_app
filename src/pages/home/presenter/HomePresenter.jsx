@@ -8,10 +8,12 @@ import { IoIosStar } from "react-icons/io";
 import { IoIosStarOutline } from "react-icons/io";
 import { IoMdPin } from "react-icons/io";
 import { IoMdFunnel } from "react-icons/io";
+import FloatingButton from "../../../components/floatingButton/FloatingButton";
 
-const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuItem, setOpen, menuItems}) => {
+const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuItem, setOpen, menuItems, createRestaurant}) => {
 	return (
 		<div>
+			<FloatingButton onClick={createRestaurant}>맛집 등록하기</FloatingButton>
 			{open? <Style.SheetBackground onClick={() => setOpen(false)}/> : null}
 			<Style.SearchBox>
 				<Style.MenuButton onClick={() => onClickMenu()}>

@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import HomePresenter from '../presenter/HomePresenter'
+import { useNavigate } from 'react-router-dom';
 
 const HomeContainer = () => {
+  const navigate = useNavigate();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [open, setOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,6 +25,10 @@ const HomeContainer = () => {
     setMenuOpen(!menuOpen);
   }
 
+  const createRestaurant = () => {
+    navigate('/restaurant');
+  }
+
   const onClickMenuItem = (id) => {
     let temp = [...menuItems];
     temp[id] = !temp[id];
@@ -36,7 +42,8 @@ const HomeContainer = () => {
     onClickMenu,
     onClickMenuItem,
     setOpen,
-    menuItems
+    menuItems,
+    createRestaurant
   };
 
   return (

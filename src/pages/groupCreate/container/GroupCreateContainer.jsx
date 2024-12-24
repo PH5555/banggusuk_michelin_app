@@ -44,6 +44,8 @@ const GroupCreateContainer = () => {
   }, [inputEl, fileInputHandler]);
 
   const createGroup = () => {
+    if(password !== passwordConfirm) return;
+    
 	  const formData = new FormData();
 	  formData.append("file", file);
 	  formData.append("groupName", name);

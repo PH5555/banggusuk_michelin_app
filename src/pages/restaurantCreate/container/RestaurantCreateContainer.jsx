@@ -1,15 +1,15 @@
 import React, {useState, useCallback, useRef, useEffect} from 'react';
 import RestaurantCreatePresenter from '../presenter/RestaurantCreatePresenter'
-import { useAxios } from '../../../hook/useAxios';
-
+import { getCookie } from '../../../util/Cookie';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RestaurantCreateContainer = () => {
-
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     name: "",
     comment: "",
   });
-
   const inputEl = useRef(null);
   const [file, setFile] = useState();
   const [menuItems, setMenuItems] = useState([true, false, false]);
@@ -17,9 +17,7 @@ const RestaurantCreateContainer = () => {
   const [selectedRestaurant, setSelectedRestaurant] = useState({});
   const [isVisiblePopUp , setIsVisiblePopUp] = useState(false);
   const { name, comment } = inputs;
-  const [axiosData, isLoading] = useAxios();
-
-
+  const [isLoading, setIsLoading] = useState();
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -57,7 +55,11 @@ const RestaurantCreateContainer = () => {
   }
 
   const selectRestaurant = (id) =>{
-	setSelectedRestaurant(searchedRestaurant[id]);
+	  setSelectedRestaurant(searchedRestaurant[id]);
+    setInputs({
+      ...inputs,
+      name : searchedRestaurant[id].content.name,
+    });
     setIsVisiblePopUp(false);
   }
 
@@ -73,15 +75,37 @@ const RestaurantCreateContainer = () => {
   }
   
   const createRestaurant = async() => {
-	// const response = await axiosData("file", "POST", "/restaurant", {
-	//   restaurantName: name,
-	//   address: selectedRestaurant.content.address,
-	//   image: file,
-	//   comment: comment,
-	// rating: menuItems.filter(Boolean).length,
-	//   groupId: //groupid 
-	// 	//좌표도 넣기
-	// });
+    setIsLoading(true);
+    let count = menuItems.filter(element => true === element).length;
+    const formData = new FormData();
+	  formData.append("file", file);
+	  formData.append("restaurantName", name);
+	  formData.append("comment", comment);
+	  formData.append("rating", count);
+	  formData.append("address", selectedRestaurant);
+	  formData.append("groupId", getCookie('groupId'));
+	  formData.append("latitude", selectedRestaurant.position.lat);
+	  formData.append("longitude", selectedRestaurant.position.lng);
+
+	  setIsLoading(true);
+	  axios.post('https://banggusuk-michelin.onrender.com/restaurant', formData, {
+		  headers: {'X-AUTH-TOKEN': getCookie('accessToken')},
+		  
+	  }).then((response) => {
+		  const res = response.data;
+      console.log(res);
+		  if(res.status === "success"){
+        navigate(-1);
+        console.log('장소 만들기 성공!');
+		  }
+		  else {
+			  console.log('장소 만들기 실패!');
+		  }
+	  }).catch((error) => {
+		  console.log(error);
+	  }).finally(()=>{
+		  setIsLoading(false);
+	  });
   }
 
   const fileInputHandler = useCallback((event) => {
@@ -112,11 +136,11 @@ const RestaurantCreateContainer = () => {
     onClickMenuItem,
     isVisiblePopUp,
     setIsVisiblePopUp,
-	searchedRestaurant,
-	selectRestaurant,
-	selectedRestaurant,
-	isLoading,
-	createRestaurant
+    searchedRestaurant,
+    selectRestaurant,
+    selectedRestaurant,
+    isLoading,
+    createRestaurant
   };
 
   return (
