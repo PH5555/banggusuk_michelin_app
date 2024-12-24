@@ -10,7 +10,8 @@ import { IoMdPin } from "react-icons/io";
 import { IoMdFunnel } from "react-icons/io";
 import FloatingButton from "../../../components/floatingButton/FloatingButton";
 
-const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuItem, setOpen, menuItems, createRestaurant}) => {
+const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuItem, setOpen, menuItems, createRestaurant, location}) => {
+	console.log(location)
 	return (
 		<div>
 			<FloatingButton onClick={createRestaurant}>맛집 등록하기</FloatingButton>
@@ -68,7 +69,7 @@ const HomePresenter = ({windowWidth, open, menuOpen, onClickMenu, onClickMenuIte
 			</Style.Menu> : null}
 			
 			<Map
-			center={{ lat: 33.5563, lng: 126.79581 }}
+			center={location}
 			style={{ width: "100%", height: "100vh" }}
 			>
 				<CustomOverlayMap position={{ lat: 33.55635, lng: 126.795841 }}>

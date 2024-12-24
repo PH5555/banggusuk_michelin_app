@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import LoginPresenter from '../presenter/LoginPresenter';
 import { useSearchParams } from 'react-router-dom';
-import { useAxios } from '../../../hook/useAxios';
 import { setCookie } from '../../../util/Cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
